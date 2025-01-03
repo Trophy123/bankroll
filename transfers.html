@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transfers | Carders Haven</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0a0a23;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #1c1c3c;
+      border-bottom: 2px solid #2b2b5b;
+    }
+
+    header h1 {
+      font-size: 1.5em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0;
+    }
+
+    header h1 span {
+      font-size: 1.8em;
+    }
+
+    .cart-icon {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+
+    .cart-icon span {
+      background-color: #2b2b5b;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .cart-icon:hover span {
+      background-color: #3b3b6b;
+    }
+
+    .navbar-icons {
+      display: flex;
+      justify-content: space-between;
+      background-color: #1f1f4f;
+    }
+
+    .navbar-icons a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.5em;
+      text-align: center;
+      flex: 1;
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #2b2b5b;
+      border-right: 1px solid #1c1c3c;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar-icons a:last-child {
+      border-right: none;
+    }
+
+    .navbar-icons a:hover {
+      background-color: #00ff7f;
+      color: #0a0a23;
+    }
+
+    .dashboard {
+      text-align: center;
+      margin: 20px auto;
+      max-width: 1200px;
+    }
+
+    .dashboard h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .transfer-card {
+      background: linear-gradient(to bottom, #1c1c3c, #1f1f4f);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 15px 0;
+      text-align: left;
+      color: #fff;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    .transfer-card h3 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.5em;
+      margin: 0;
+    }
+
+    .transfer-card .icon {
+      width: 40px;
+      height: 40px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .transfer-card .icon.cashapp {
+      background-color: #00ff7f;
+    }
+
+    .transfer-card .icon.paypal {
+      background-color: #0070ba;
+    }
+
+    .transfer-card .icon.zelle {
+      background-color: #8e44ad;
+    }
+
+    .transfer-card .info {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .transfer-card .info span {
+      font-size: 1em;
+      padding: 5px 10px;
+      background-color: #2b2b5b;
+      border-radius: 5px;
+    }
+
+    .transfer-card .info span.verified {
+      background-color: #00ff7f;
+    }
+
+    .transfer-card .balance-price {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+    }
+
+    .transfer-card .balance {
+      font-size: 1.2em;
+    }
+
+    .transfer-card button {
+      background-color: #2b2b5b;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    .transfer-card button:hover {
+      background-color: #00ff7f;
+      color: #0a0a23;
+    }
+
+    .sliding-text {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #2b2b5b;
+      color: #fff;
+      font-size: 1.2em;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .sliding-text span {
+      display: inline-block;
+      padding: 10px 0;
+      animation: slide 10s linear infinite;
+    }
+
+    @keyframes slide {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <h1><span>🦉</span>Carders Haven</h1>
+    <div class="cart-icon" onclick="goToCartPage()">
+      🛒 <span>Cart</span>
+    </div>
+  </header>
+
+  <!-- Navigation Bar -->
+  <div class="navbar-icons">
+    <a href="banklogs.html" title="Bank Logs">🏦</a>
+    <a href="cards.html" title="Cards">💳</a>
+    <a href="transfers.html" title="Transfers"><span style="color: green;">💲</span></a>
+    <a href="contact.html" title="Contact">📞</a>
+    <a href="logout.html" title="Logout">🔓</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="dashboard">
+    <h2>Transfers</h2>
+    <div id="transferCardsContainer"></div>
+  </div>
+
+  <!-- Sliding Text -->
+  <div class="sliding-text">
+    <span>🌐 Providing quality logs since 2022 🌐</span>
+  </div>
+
+  <script>
+    const transfers = [];
+    const icons = ["cashapp", "paypal", "zelle"];
+    const types = ["CashApp", "PayPal", "Zelle"];
+    
+    // Generate 245 transfer items
+    for (let i = 1; i <= 143; i++) {
+      const balance = Math.floor(Math.random() * (5000 - 100) + 100);
+      const price = Math.round(balance * 0.05);
+      const typeIndex = i % types.length;
+      transfers.push({
+        type: types[typeIndex],
+        balance: balance,
+        price: price,
+        icon: icons[typeIndex],
+      });
+    }
+
+    function populateTransfers() {
+      const container = document.getElementById("transferCardsContainer");
+      container.innerHTML = ""; // Clear the container
+
+      transfers.forEach((transfer) => {
+        const card = document.createElement("div");
+        card.className = "transfer-card";
+        card.innerHTML = `
+          <h3><span class="icon ${transfer.icon}">${transfer.type[0]}</span> ${transfer.type}</h3>
+          <div class="info">
+            <span class="verified">Verified</span>
+            <span class="verified">SSN/DOB</span>
+            <span class="verified">Guide</span>
+          </div>
+          <div class="balance-price">
+            <div class="balance">Balance: $${transfer.balance.toFixed(2)}</div>
+            <button onclick="addToCart('${transfer.type}', ${transfer.price})">Add to Cart - $${transfer.price}</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function addToCart(item, price) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({ item, price });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`${item} added to cart for $${price}!`);
+    }
+
+    function goToCartPage() {
+      window.location.href = 'cart.html';
+    }
+
+    document.addEventListener("DOMContentLoaded", populateTransfers);
+  </script>
+</body>
+</html>

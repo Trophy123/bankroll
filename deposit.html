@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deposit | Carders Haven</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #101226;
+      color: #fff;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background-color: #1a1b3a;
+      border-bottom: 2px solid #272952;
+    }
+
+    header h1 {
+      font-size: 1.5em;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 0;
+      background-color: #1a1b3a;
+      border-bottom: 2px solid #272952;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.5em;
+      padding: 10px;
+      background-color: #272952;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      transition: background 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #343969;
+    }
+
+    .deposit-container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 15px;
+      background: #1a1b3a;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .notice {
+      margin-top: 15px;
+      padding: 10px;
+      background: #343969;
+      border-radius: 8px;
+      font-size: 0.9em;
+      color: #87CEEB;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .amount-section, .choose-payment, .payment-methods, .payment-details {
+      margin-top: 15px;
+    }
+
+    .amount-section input, .payment-details input {
+      width: 100%;
+      padding: 8px;
+      background: #272952;
+      border: none;
+      color: #fff;
+      border-radius: 5px;
+      font-size: 0.9em;
+    }
+
+    .choose-payment {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      background-color: #272952;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .choose-payment:hover {
+      background-color: #343969;
+    }
+
+    .payment-methods {
+      display: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .payment-method {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      background: #272952;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+
+    .payment-method:hover {
+      background-color: #343969;
+    }
+
+    .payment-method i {
+      font-size: 1.5em;
+      margin-right: 10px;
+    }
+
+    .btn-deposit {
+      width: 100%;
+      padding: 10px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      background-color: #00cc88;
+      color: #101226;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .btn-deposit:hover {
+      background-color: #00a76e;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="home.html">🏠</a>
+    <a href="banklogs.html">🏦</a>
+    <a href="cart.html">🛒</a>
+    <a href="contact.html">📞</a>
+  </nav>
+
+  <header>
+    <h1>Deposit Funds</h1>
+  </header>
+
+  <div class="deposit-container">
+    <div class="notice">
+      <p>Minimum deposit is $20. Secure your purchase now and enjoy instant access to our products upon confirmation of payment!</p>
+    </div>
+
+    <div class="amount-section">
+      <label for="deposit-amount">Enter Deposit Amount:</label>
+      <input type="number" id="deposit-amount" placeholder="Enter amount (Minimum $20)" min="20">
+    </div>
+
+    <div class="choose-payment" onclick="togglePaymentMethods()">
+      <span>Choose Payment Method</span>
+      <i id="toggle-icon" class="fas fa-chevron-down"></i>
+    </div>
+
+    <div id="payment-methods" class="payment-methods">
+      <div class="payment-method" onclick="showDetails('BTC', '15G22mkKKzVDkgcBNPPMtQPgbD7pCEH3CU')">
+        <i class="fab fa-bitcoin" style="color: #f7931a;"></i>
+        <span>Bitcoin (BTC)</span>
+      </div>
+      <div class="payment-method" onclick="showDetails('USDT', 'TVqtwtu77YEqJtGMUYTr5KMQWvMdN9nGbh')">
+        <i class="fas fa-dollar-sign" style="color: #32cd32;"></i>
+        <span>USDT</span>
+      </div>
+      <div class="payment-method" onclick="notifyMaintenance('PayPal')">
+        <i class="fab fa-paypal" style="color: #0070ba;"></i>
+        <span>PayPal (Under Maintenance)</span>
+      </div>
+      <div class="payment-method" onclick="notifyMaintenance('Cash App')">
+        <i class="fas fa-money-bill-wave" style="color: #28a745;"></i>
+        <span>Cash App (Under Maintenance)</span>
+      </div>
+    </div>
+
+    <div id="payment-details" class="payment-details" style="display: none;">
+      <input type="text" id="payment-address" readonly>
+      <button class="copy-btn" onclick="copyAddress()">Copy Address</button>
+    </div>
+
+    <button id="confirm-btn" class="btn-deposit" style="display: none;" onclick="redirectToConfirmation()">
+      Confirm Deposit
+    </button>
+  </div>
+
+  <script>
+    const paymentMethods = document.getElementById('payment-methods');
+    const paymentDetails = document.getElementById('payment-details');
+    const paymentAddress = document.getElementById('payment-address');
+    const confirmBtn = document.getElementById('confirm-btn');
+
+    function togglePaymentMethods() {
+      paymentMethods.style.display = paymentMethods.style.display === 'none' ? 'grid' : 'none';
+    }
+
+    function showDetails(method, address) {
+      const amount = document.getElementById('deposit-amount').value;
+      if (!amount || amount < 20) {
+        alert('Please enter a valid deposit amount of $20 or more.');
+        return;
+      }
+      paymentAddress.value = address;
+      paymentDetails.style.display = 'block';
+      confirmBtn.style.display = 'block';
+      alert(`${method} selected. Payment address is displayed.`);
+    }
+
+    function copyAddress() {
+      paymentAddress.select();
+      navigator.clipboard.writeText(paymentAddress.value);
+      alert('Payment address copied!');
+    }
+
+    function redirectToConfirmation() {
+      const amount = document.getElementById('deposit-amount').value;
+      window.location.href = `confirmation.html?amount=${amount}`;
+    }
+
+    function notifyMaintenance(method) {
+      alert(`${method} is currently under maintenance. Please select another method.`);
+    }
+  </script>
+</body>
+</html>

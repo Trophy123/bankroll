@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proceed to Payment | Carders Haven</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #101226;
+      color: #fff;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 20px;
+      background-color: #1a1b3a;
+      border-bottom: 2px solid #272952;
+    }
+
+    /* Navigation Bar */
+    nav {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 0;
+      background-color: #1a1b3a;
+      border-bottom: 2px solid #272952;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.5em;
+      padding: 10px;
+      background-color: #272952;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      transition: background 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #343969;
+    }
+
+    /* Payment Container */
+    .payment-container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 15px;
+      background: #1a1b3a;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .notification {
+      background: #272952;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      font-size: 1.1em;
+      line-height: 1.5;
+    }
+
+    .notification span {
+      color: #87ceeb;
+    }
+
+    .choose-payment {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      background-color: #272952;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .choose-payment:hover {
+      background-color: #343969;
+    }
+
+    .payment-methods {
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .payment-details {
+      margin-top: 10px;
+      background: #343969;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .payment-details input {
+      width: 100%;
+      background: #272952;
+      border: none;
+      color: #fff;
+      padding: 8px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .copy-btn {
+      padding: 5px 10px;
+      background-color: #ffbf47;
+      border: none;
+      color: #101226;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 0.8em;
+      transition: background 0.3s ease;
+    }
+
+    .copy-btn:hover {
+      background-color: #e3a33c;
+    }
+
+    .btn-payment {
+      width: 100%;
+      padding: 10px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      color: #101226;
+      background-color: #00cc88;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .btn-payment:hover {
+      background-color: #00a76e;
+    }
+
+    /* Footer */
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #1a1b3a;
+      color: #87ceeb;
+      text-align: center;
+      padding: 10px;
+      font-size: 1em;
+      animation: slide-text 10s linear infinite;
+    }
+
+    @keyframes slide-text {
+      from {
+        transform: translateX(100%);
+      }
+      to {
+        transform: translateX(-100%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="index.html">🏠</a>
+    <a href="banklogs.html">🏦</a>
+    <a href="cart.html">🛒</a>
+    <a href="contact.html">📞</a>
+  </nav>
+
+  <!-- Header -->
+  <header>
+    <h1>Proceed to Payment</h1>
+  </header>
+
+  <!-- Payment Container -->
+  <div class="payment-container">
+    <div class="notification">
+      <strong>Important Notice:</strong> Please choose your preferred payment method below. Once payment is confirmed, your product will be delivered instantly.
+    </div>
+
+    <!-- Choose Payment Bar -->
+    <div class="choose-payment" onclick="togglePaymentMethods()">
+      <span>Choose Payment Method</span>
+      <i id="toggle-icon" class="fas fa-chevron-down"></i>
+    </div>
+
+    <!-- Payment Methods -->
+    <div id="payment-methods" class="payment-methods">
+      <div class="payment-method" onclick="selectMainBalance()">
+        <i class="fas fa-wallet"></i>
+        <span>Main Balance</span>
+      </div>
+      <div class="payment-method" onclick="showDetails('BTC', '15G22mkKKzVDkgcBNPPMtQPgbD7pCEH3CU')">
+        <i class="fab fa-bitcoin" style="color: #f7931a;"></i>
+        <span>Bitcoin (BTC)</span>
+      </div>
+      <div class="payment-method" onclick="showDetails('USDT', 'TVqtwtu77YEqJtGMUYTr5KMQWvMdN9nGbh')">
+        <span style="color: #32cd32; font-weight: bold;">USDT</span>
+      </div>
+      <div class="payment-method" onclick="notifyMaintenance('PayPal')">
+        <i class="fab fa-paypal" style="color: #0070ba;"></i>
+        <span>PayPal (Under Maintenance)</span>
+      </div>
+      <div class="payment-method" onclick="notifyMaintenance('Cash App')">
+        <i class="fas fa-money-bill-wave" style="color: #28a745;"></i>
+        <span>Cash App (Under Maintenance)</span>
+      </div>
+    </div>
+
+    <!-- Payment Details -->
+    <div id="payment-details" class="payment-details" style="display: none;">
+      <input type="text" id="payment-address" readonly>
+      <button class="copy-btn" onclick="copyAddress()">Copy Address</button>
+    </div>
+
+    <button id="confirm-btn" class="btn-payment" style="display: none;" onclick="redirectToEmailPage()">
+      Confirm Payment
+    </button>
+  </div>
+
+  <footer>🌐 providing quality logs since 2022 🌐</footer>
+
+  <script>
+    const paymentMethods = document.getElementById('payment-methods');
+    const paymentDetails = document.getElementById('payment-details');
+    const paymentAddress = document.getElementById('payment-address');
+    const confirmBtn = document.getElementById('confirm-btn');
+
+    function togglePaymentMethods() {
+      paymentMethods.style.display = paymentMethods.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function selectMainBalance() {
+      alert("Verifying Main Balance. If sufficient, the product will be sent to your email.");
+      confirmBtn.style.display = 'block';
+    }
+
+    function showDetails(method, address) {
+      paymentAddress.value = address;
+      paymentDetails.style.display = 'block';
+      confirmBtn.style.display = 'block';
+    }
+
+    function copyAddress() {
+      paymentAddress.select();
+      navigator.clipboard.writeText(paymentAddress.value);
+      alert('Address copied to clipboard!');
+    }
+
+    function notifyMaintenance(method) {
+      alert(`${method} is under maintenance. Please choose another payment method.`);
+    }
+
+    function redirectToEmailPage() {
+      window.location.href = "email-confirmation.html";
+    }
+  </script>
+</body>
+</html>

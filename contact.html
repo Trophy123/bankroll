@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Bankroll Haven</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #0a0a23, #1c1c3c);
+      color: #fff;
+      text-align: center;
+    }
+
+    header {
+      background-color: #1c1c3c;
+      padding: 20px;
+      border-bottom: 2px solid #2b2b5b;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+      color: #00ff7f;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #2b2b5b;
+      border-radius: 10px;
+    }
+
+    .container h2 {
+      font-size: 1.8em;
+      margin-bottom: 20px;
+      color: #00ff7f;
+    }
+
+    .form-group {
+      margin: 15px 0;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    .form-group textarea {
+      resize: none;
+      height: 100px;
+    }
+
+    .submit-btn {
+      margin-top: 20px;
+      padding: 15px 30px;
+      background-color: #00ff7f;
+      color: #0a0a23;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #00e676;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header Section -->
+  <header>
+    <h1>Contact Us</h1>
+  </header>
+
+  <!-- Contact Form Section -->
+  <div class="container">
+    <h2>We'd love to hear from you!</h2>
+    <form action="submit.html" method="POST">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Enter your message" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Send Message</button>
+    </form>
+  </div>
+</body>
+
+</html>

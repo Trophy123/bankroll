@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Cart | Carders Haven</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #101226;
+      color: #fff;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+      background-color: #1a1b3a;
+      border-bottom: 2px solid #272952;
+    }
+
+    header h1 {
+      font-size: 1.5em;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 500px;
+      margin-top: 10px;
+    }
+
+    nav a {
+      flex: 1;
+      text-align: center;
+      color: #fff;
+      text-decoration: none;
+      padding: 8px;
+      font-size: 0.9em;
+      background-color: #272952;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      transition: background 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #343969;
+    }
+
+    .cart-container {
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 15px;
+      background: #1a1b3a;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .cart-container h2 {
+      text-align: center;
+      font-size: 1.2em;
+      margin-bottom: 15px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background: #272952;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .cart-item span {
+      font-size: 0.9em;
+    }
+
+    .cart-item button {
+      background-color: #ff4747;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-size: 0.8em;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .cart-item button:hover {
+      background-color: #e33c3c;
+    }
+
+    .cart-total {
+      text-align: center;
+      font-size: 1em;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      margin-top: 15px;
+      padding: 10px;
+      font-size: 1em;
+      font-weight: bold;
+      text-align: center;
+      border: none;
+      border-radius: 8px;
+      color: #101226;
+      background-color: #00cc88;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .checkout-btn:hover {
+      background-color: #00a76e;
+    }
+
+    .proceed-btn {
+      display: none;
+      width: 100%;
+      margin-top: 15px;
+      padding: 10px;
+      font-size: 1em;
+      font-weight: bold;
+      text-align: center;
+      border: none;
+      border-radius: 8px;
+      color: #101226;
+      background-color: #ffbf47;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .proceed-btn:hover {
+      background-color: #e3a33c;
+    }
+
+    .empty-message {
+      text-align: center;
+      font-size: 1em;
+      color: #ff4747;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1><span>🛒</span>My Cart</h1>
+    <nav>
+      <a href="home.html"><i class="fas fa-home"></i></a>
+      <a href="banklogs.html"><i class="fas fa-university"></i></a>
+      <a href="transfers.html"><i class="fas fa-exchange-alt"></i></a>
+      <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+    </nav>
+  </header>
+
+  <!-- Cart Container -->
+  <div class="cart-container">
+    <h2>Your Cart</h2>
+    <div id="cart-items">
+      <!-- Items will be dynamically loaded here -->
+    </div>
+    <div id="cart-total" class="cart-total">Total: $0</div>
+    <button id="checkout-btn" class="checkout-btn" onclick="checkout()">Checkout</button>
+    <button id="proceed-btn" class="proceed-btn" onclick="proceedToPayment()">Proceed to Payment</button>
+  </div>
+
+  <script>
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartTotalElement = document.getElementById('cart-total');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const proceedBtn = document.getElementById('proceed-btn');
+
+    function loadCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cartItemsContainer.innerHTML = '';
+      let total = 0;
+
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = `<p class="empty-message">Your cart is empty!</p>`;
+        checkoutBtn.style.display = 'none';
+        proceedBtn.style.display = 'none';
+        return;
+      }
+
+      cart.forEach((item, index) => {
+        total += item.price;
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.innerHTML = `
+          <span>${item.item} - $${item.price.toFixed(2)}</span>
+          <button onclick="removeFromCart(${index})">Remove</button>
+        `;
+        cartItemsContainer.appendChild(cartItem);
+      });
+
+      cartTotalElement.textContent = `Total: $${total.toFixed(2)}`;
+    }
+
+    function removeFromCart(index) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      loadCart();
+    }
+
+    function checkout() {
+      alert('Checkout complete! Proceed to payment.');
+      localStorage.removeItem('cart');
+      loadCart();
+      checkoutBtn.style.display = 'none';
+      proceedBtn.style.display = 'block';
+    }
+
+    function proceedToPayment() {
+      window.location.href = 'payment.html'; // Replace with your payment page URL
+    }
+
+    // Load cart on page load
+    loadCart();
+  </script>
+</body>
+</html>

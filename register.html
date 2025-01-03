@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    #auth-container {
+      width: 400px;
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+    form input, form button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 5px;
+    }
+    form input {
+      background: #333;
+      color: #fff;
+      border: 1px solid #555;
+    }
+    form button {
+      background: #007bff;
+      color: #fff;
+      cursor: pointer;
+    }
+    form button:hover {
+      background: #0056b3;
+    }
+    .link {
+      color: #007bff;
+      cursor: pointer;
+      display: block;
+      margin-top: 10px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="auth-container">
+    <h2>Register</h2>
+    <form id="register-form">
+      <input type="email" id="register-email" placeholder="Enter Email" required>
+      <input type="password" id="register-password" placeholder="Enter Password" required>
+      <button type="submit">Register</button>
+    </form>
+    <a href="login.html" class="link">Already have an account? Login</a>
+  </div>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAXRnxc0O9CwQwgy3WsDYUbhLiZbUg2u20",
+      authDomain: "mywebauth-756ea.firebaseapp.com",
+      projectId: "mywebauth-756ea",
+      storageBucket: "mywebauth-756ea.firebaseapp.com",
+      messagingSenderId: "872597841352",
+      appId: "1:872597841352:web:ade23e1ba3cf3dd3498cfd",
+      measurementId: "G-Z93WL5EW2Z"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+
+    document.getElementById("register-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("register-email").value;
+      const password = document.getElementById("register-password").value;
+
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        alert("Registration successful!");
+        window.location.href = "login.html";
+      } catch (error) {
+        alert(`Error: ${error.message}`);
+      }
+    });
+  </script>
+</body>
+</html>

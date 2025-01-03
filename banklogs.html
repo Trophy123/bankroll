@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank Logs - Bankroll Haven</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0a0a23;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #1c1c3c;
+      border-bottom: 2px solid #2b2b5b;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    header h1 span {
+      font-size: 1.8em;
+    }
+
+    .navbar-icons {
+      display: flex;
+      justify-content: space-between;
+      background-color: #1f1f4f;
+      padding: 10px 20px;
+    }
+
+    .navbar-icons a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 2em;
+      text-align: center;
+      flex: 1;
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #2b2b5b;
+      border-right: 1px solid #1c1c3c;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar-icons a:last-child {
+      border-right: none;
+    }
+
+    .navbar-icons a:hover {
+      background-color: #00ff7f;
+      color: #0a0a23;
+    }
+
+    .dashboard {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .table-container {
+      background-color: #1f1f4f;
+      border-radius: 10px;
+      padding: 20px;
+      overflow-y: auto;
+      max-height: 400px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      color: #fff;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #2b2b5b;
+    }
+
+    tr:nth-child(even) {
+      background-color: #2f2f6b;
+    }
+
+    tr:hover {
+      background-color: #444475;
+      cursor: pointer;
+    }
+
+    .sliding-text {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #2b2b5b;
+      color: #fff;
+      font-size: 1.2em;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .sliding-text span {
+      display: inline-block;
+      padding: 10px 0;
+      animation: slide 10s linear infinite;
+    }
+
+    @keyframes slide {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header Section -->
+  <header>
+    <h1><span>🦉</span>Bankroll Haven</h1>
+  </header>
+
+  <!-- Navigation Bar -->
+  <div class="navbar-icons">
+    <a href="banklogs.html" title="Bank Logs">🏦</a>
+    <a href="cards.html" title="Cards">💳</a>
+    <a href="cart.html" title="Cart">🛒</a>
+    <a href="transfers.html" title="Transfers"><span style="color: green;">💲</span></a>
+    <a href="contact.html" title="Contact">📞</a>
+    <a href="logout.html" title="Logout">🔓</a>
+  </div>
+
+  <!-- Bank Logs Content -->
+  <div class="dashboard">
+    <h2>Bank Logs</h2>
+    <div class="table-container">
+      <table id="bankLogsTable">
+        <thead>
+          <tr>
+            <th>Bank Name</th>
+            <th>Balance</th>
+            <th>Country</th>
+            <th>DOB</th>
+            <th>State</th>
+            <th>Gender</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Add to Cart</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Dynamic Rows Added Here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Sliding Text -->
+  <div class="sliding-text">
+    <span>🌐 providing quality logs since 2022🌐</span>
+  </div>
+
+  <script>
+    // Bank names and USA states
+    const bankNames = ['Chase', 'Wells Fargo', 'Robinhood', 'Huntington', 'PNC', 'KeyBank', 'West Bank', 'Truist'];
+    const states = ['California', 'Texas', 'Florida', 'New York', 'Illinois', 'Ohio', 'Georgia', 'North Carolina', 'Michigan', 'Pennsylvania'];
+    const fullDescription = 'Email access (user&pw), plaid, wire and zelle enabled, Cookies, IP, AN/RN, phone, carrier pin, CVV/exp, bill pay off';
+
+    // Generate bank logs
+    let bankLogs = Array.from({ length: 281 }, (_, i) => {
+      const balance = i < 70 ? Math.floor(Math.random() * 10000) + 1000 : Math.floor(Math.random() * 90000) + 20000;
+      const price = Math.round(balance * 0.05);
+      return {
+        bankName: bankNames[i % bankNames.length],
+        balance,
+        country: 'US',
+        dob: `${Math.floor(Math.random() * 12) + 1}/${Math.floor(Math.random() * 28) + 1}/${Math.floor(Math.random() * 40) + 1960}`,
+        state: states[i % states.length],
+        gender: Math.random() > 0.5 ? 'Male' : 'Female',
+        price,
+        description: fullDescription
+      };
+    });
+
+    // Function to populate the bank logs table
+    function populateBankLogs() {
+      const tbody = document.querySelector('#bankLogsTable tbody');
+      tbody.innerHTML = ''; // Clear previous rows
+      bankLogs.forEach(log => {
+        const row = `
+          <tr>
+            <td>${log.bankName}</td>
+            <td>$${log.balance.toFixed(2)}</td>
+            <td>${log.country}</td>
+            <td>${log.dob}</td>
+            <td>${log.state}</td>
+            <td>${log.gender}</td>
+            <td>$${log.price.toFixed(2)}</td>
+            <td>${log.description}</td>
+            <td><button onclick="addToCart('${log.bankName}', ${log.balance}, ${log.price})">Add to Cart</button></td>
+          </tr>
+        `;
+        tbody.innerHTML += row;
+      });
+    }
+
+    // Function to add item to cart and store in local storage
+    function addToCart(bankName, balance, price) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({ bankName, balance, price });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`${bankName} added to cart`);
+    }
+
+    // Populate bank logs on page load
+    document.addEventListener('DOMContentLoaded', populateBankLogs);
+  </script>
+</body>
+
+</html>

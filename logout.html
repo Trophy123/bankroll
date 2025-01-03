@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logout</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0a0a23;
+      color: #fff;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .logout-container {
+      text-align: center;
+      background-color: #1c1c3c;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .logout-container h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .logout-container p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+
+    .logout-container button {
+      padding: 10px 20px;
+      font-size: 1em;
+      color: #fff;
+      background-color: #ff4b5c;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .logout-container button:hover {
+      background-color: #e03b4c;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="logout-container">
+    <h1>Logout</h1>
+    <p>You have been logged out successfully.</p>
+    <button onclick="redirectToLogin()">Go to Login</button>
+  </div>
+
+  <script>
+    // Clear user data and redirect to the login page
+    function logout() {
+      // Clear all user data stored in localStorage
+      localStorage.clear();
+    }
+
+    // Redirect to login page
+    function redirectToLogin() {
+      window.location.href = "login.html";
+    }
+
+    // Perform logout on page load
+    window.onload = logout;
+  </script>
+</body>
+
+</html>

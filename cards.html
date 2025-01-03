@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cards | Carders Haven</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0a0a23;
+      color: #fff;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #1c1c3c;
+      border-bottom: 2px solid #2b2b5b;
+    }
+
+    header h1 {
+      font-size: 1.5em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0;
+    }
+
+    header h1 span {
+      font-size: 1.8em;
+    }
+
+    .cart-icon {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+
+    .cart-icon span {
+      background-color: #2b2b5b;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .cart-icon:hover span {
+      background-color: #3b3b6b;
+    }
+
+    .navbar-icons {
+      display: flex;
+      justify-content: space-between;
+      background-color: #1f1f4f;
+    }
+
+    .navbar-icons a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.5em;
+      text-align: center;
+      flex: 1;
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #2b2b5b;
+      border-right: 1px solid #1c1c3c;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar-icons a:last-child {
+      border-right: none;
+    }
+
+    .navbar-icons a:hover {
+      background-color: #00ff7f;
+      color: #0a0a23;
+    }
+
+    .dashboard {
+      text-align: center;
+      margin: 20px auto;
+      max-width: 1200px;
+    }
+
+    .dashboard h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .card-item {
+      background: linear-gradient(to bottom, #1c1c3c, #1f1f4f);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 15px 0;
+      text-align: left;
+      color: #fff;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .card-details {
+      flex: 1;
+    }
+
+    .card-details h3 {
+      margin: 0;
+      font-size: 1.5em;
+    }
+
+    .card-details .info {
+      margin-top: 10px;
+    }
+
+    .card-details .info span {
+      font-size: 1em;
+      padding: 5px 10px;
+      background-color: #00ff7f;
+      border-radius: 5px;
+      margin-right: 5px;
+      display: inline-block;
+    }
+
+    .card-details .bin {
+      margin-top: 10px;
+      font-size: 1.1em;
+      color: #ffcc00;
+    }
+
+    .card-details button {
+      background-color: #2b2b5b;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    .card-details button:hover {
+      background-color: #00ff7f;
+      color: #0a0a23;
+    }
+
+    .sliding-text {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #2b2b5b;
+      color: #fff;
+      font-size: 1.2em;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .sliding-text span {
+      display: inline-block;
+      padding: 10px 0;
+      animation: slide 10s linear infinite;
+    }
+
+    @keyframes slide {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><span>🦉</span>Carders Haven</h1>
+    <div class="cart-icon" onclick="goToCartPage()">
+      🛒 <span>Cart</span>
+    </div>
+  </header>
+
+  <div class="navbar-icons">
+    <a href="banklogs.html" title="Bank Logs">🏦</a>
+    <a href="cards.html" title="Cards" style="color: green;">💳</a>
+    <a href="transfers.html" title="Transfers">💲</a>
+    <a href="contact.html" title="Contact">📞</a>
+    <a href="logout.html" title="Logout">🔓</a>
+  </div>
+
+  <div class="dashboard">
+    <h2>Available Cards</h2>
+    <div id="card-list"></div>
+  </div>
+
+  <div class="sliding-text">
+    <span>🌐 Providing quality logs since 2022 🌐</span>
+  </div>
+
+  <script>
+    const cardList = document.getElementById('card-list');
+    const cardTypes = [
+      { type: 'VISA', bin: '4423xxxxxxxxxxxx' },
+      { type: 'MasterCard', bin: '5500xxxxxxxxxxxx' },
+      { type: 'AMEX', bin: '3782xxxxxxxxxxxx' },
+      { type: 'Discover', bin: '6011xxxxxxxxxxxx' }
+    ];
+
+    // Random price generator
+    const getRandomPrice = () => Math.floor(Math.random() * (80 - 20 + 1)) + 20;
+
+    for (let i = 1; i <= 214; i++) {
+      const card = cardTypes[i % cardTypes.length];
+      const price = getRandomPrice();
+      const cardItem = `
+        <div class="card-item">
+          <img src="https://img.icons8.com/color/48/000000/${card.type.toLowerCase()}.png" alt="${card.type} Logo">
+          <div class="card-details">
+            <h3>${card.type} Card #${i}</h3>
+            <div class="info">
+              <span>Verified</span>
+              <span>Address</span>
+              <span>SSN/DOB</span>
+            </div>
+            <div class="bin">BIN: ${card.bin}</div>
+            <button onclick="addToCart('${card.type} Card #${i}', ${price})">Add to Cart - $${price}</button>
+          </div>
+        </div>
+      `;
+
+      cardList.innerHTML += cardItem;
+    }
+
+    function addToCart(item, price) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({ item, price });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`${item} added to cart for $${price}!`);
+    }
+
+    function goToCartPage() {
+      window.location.href = 'cart.html';
+    }
+  </script>
+</body>
+</html>

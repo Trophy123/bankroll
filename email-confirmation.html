@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Confirmation | Carders Haven</title>
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #101226;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .confirmation-container {
+      background-color: #1a1b3a;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .confirmation-container h1 {
+      font-size: 2em;
+      margin-bottom: 15px;
+      color: #87ceeb;
+    }
+
+    .confirmation-container p {
+      font-size: 1em;
+      margin-bottom: 25px;
+      line-height: 1.6;
+      color: #d1d5db;
+    }
+
+    .email-input {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .email-input input {
+      width: 100%;
+      padding: 10px;
+      background: #272952;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 1em;
+    }
+
+    .email-input input::placeholder {
+      color: #9ca3af;
+    }
+
+    .email-input button {
+      padding: 12px;
+      background-color: #00cc88;
+      color: #101226;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .email-input button:hover {
+      background-color: #00a76e;
+    }
+
+    .btn-home {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #343969;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1em;
+      transition: background 0.3s ease;
+    }
+
+    .btn-home:hover {
+      background-color: #272952;
+    }
+  </style>
+</head>
+<body>
+  <div class="confirmation-container">
+    <h1>Payment Confirmed!</h1>
+    <p>
+      Your payment has been successfully processed. Your product will be sent to your registered email shortly once your payment confirmed.
+      If you'd like to use a different email address, please enter it below.
+    </p>
+    <div class="email-input">
+      <input type="email" id="alt-email" placeholder="Enter an alternate email address">
+      <button onclick="submitEmail()">Submit Email</button>
+    </div>
+    <a href="home.html" class="btn-home">Return to Home</a>
+  </div>
+
+  <script>
+    function submitEmail() {
+      const emailInput = document.getElementById('alt-email').value;
+      if (emailInput === '') {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      alert(`Thank you! Your product will be sent to: ${emailInput}`);
+      // Add functionality here to process the alternate email address
+    }
+  </script>
+</body>
+</html>

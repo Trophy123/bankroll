@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bankroll Haven</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0a0a23;
+      color: #fff;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #1c1c3c;
+      border-bottom: 2px solid #2b2b5b;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+    }
+
+    header h1 span {
+      font-size: 1.8em;
+      animation: popUp 1.5s infinite ease-in-out;
+    }
+
+    @keyframes popUp {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+    }
+
+    .balance {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+
+    .balance span {
+      background-color: #2b2b5b;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .balance:hover span {
+      background-color: #3b3b6b;
+    }
+
+    .navbar-icons {
+      display: flex;
+      justify-content: space-between;
+      background-color: #1f1f4f;
+      padding: 0;
+    }
+
+    .navbar-icons a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 2em;
+      text-align: center;
+      flex: 1;
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #2b2b5b;
+      border-right: 1px solid #1c1c3c;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar-icons a:last-child {
+      border-right: none;
+    }
+
+    .navbar-icons a:hover {
+      background-color: #00ff7f;
+      color: #0a0a23;
+    }
+
+    .dashboard {
+      text-align: center;
+      margin: 20px auto;
+      max-width: 1200px;
+    }
+
+    .dashboard h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .search-box {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .search-box input {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 60%;
+      font-size: 1em;
+    }
+
+    .table-container {
+      background-color: #1f1f4f;
+      border-radius: 10px;
+      padding: 20px;
+      overflow-y: auto;
+      max-height: 400px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      color: #fff;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #2b2b5b;
+    }
+
+    tr:nth-child(even) {
+      background-color: #2f2f6b;
+    }
+
+    tr:hover {
+      background-color: #444475;
+      cursor: pointer;
+    }
+
+    .sliding-text {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 1.1em;
+      color: #ccc;
+      background-color: #1c1c3c;
+      padding: 10px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .sliding-text span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: slideLeft 10s linear infinite;
+    }
+
+    @keyframes slideLeft {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header Section -->
+  <header>
+    <h1>
+      <span>🦉</span>Bankroll Haven
+    </h1>
+    <div class="balance" onclick="goToDepositPage()">
+      💼 <span>Balance: $0.00</span>
+    </div>
+  </header>
+
+  <!-- Second Navigation Bar -->
+  <div class="navbar-icons">
+    <a href="banklogs.html" title="Bank Logs">🏦</a>
+    <a href="cards.html" title="Cards">💳</a>
+    <a href="transfers.html" title="Transfers"><span style="color: green;">💲</span></a>
+    <a href="contact.html" title="Contact">📞</a>
+    <a href="logout.html" title="Logout">🔓</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="dashboard">
+    <h2>Welcome to Bankroll Haven</h2>
+    <div class="search-box">
+      <input type="text" id="searchBar" onkeyup="filterTable()" placeholder="Search banks, balance, country, price...">
+    </div>
+    <div class="table-container">
+      <table id="bankLogsTable">
+        <thead>
+          <tr>
+            <th>Bank Name</th>
+            <th>Balance</th>
+            <th>Country</th>
+            <th>DOB</th>
+            <th>State</th>
+            <th>Gender</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tbody>
+  <tr onclick="redirectToBankLogs()">
+    <td>Chase</td>
+    <td>$1,100.00</td>
+    <td>US</td>
+    <td>01/15/1980</td>
+    <td>California</td>
+    <td>Male</td>
+    <td>$150.00</td>
+  </tr>
+  <tr onclick="redirectToBankLogs()">
+    <td>Bank of America</td>
+    <td>$2,350.00</td>
+    <td>US</td>
+    <td>12/03/1975</td>
+    <td>New York</td>
+    <td>Female</td>
+    <td>$180.00</td>
+  </tr>
+  <tr onclick="redirectToBankLogs()">
+    <td>Wells Fargo</td>
+    <td>$5,600.00</td>
+    <td>US</td>
+    <td>06/25/1988</td>
+    <td>Texas</td>
+    <td>Male</td>
+    <td>$200.00</td>
+  </tr>
+  <tr onclick="redirectToBankLogs()">
+    <td>Citibank</td>
+    <td>$3,750.00</td>
+    <td>US</td>
+    <td>03/10/1990</td>
+    <td>Florida</td>
+    <td>Female</td>
+    <td>$250.00</td>
+  </tr>
+  <tr onclick="redirectToBankLogs()">
+    <td>Capital One</td>
+    <td>$900.00</td>
+    <td>US</td>
+    <td>08/18/1982</td>
+    <td>Ohio</td>
+    <td>Male</td>
+    <td>$100.00</td>
+  </tr>
+  <tr onclick="redirectToBankLogs()">
+    <td>HSBC</td>
+    <td>$7,200.00</td>
+    <td>UK</td>
+    <td>04/22/1970</td>
+    <td>London</td>
+    <td>Male</td>
+    <td>$300.00</td>
+  </tr>
+  <tr onclick="redirectToBankLogs()">
+    <td>Barclays</td>
+    <td>$2,800.00</td>
+    <td>UK</td>
+    <td>02/14/1985</td>
+    <td>Manchester</td>
+    <td>Female</td>
+    <td>$220.00</td>
+  </tr>
+  <tr onclick="redirectToBankLogs()">
+    <td>Standard Chartered</td>
+    <td>$4,000.00</td>
+    <td>UK</td>
+    <td>07/30/1978</td>
+    <td>Birmingham</td>
+    <td>Male</td>
+    <td>$180.00</td>
+  </tr>
+  <tr onclick="redirectToBankLogs()">
+    <td>PNC Bank</td>
+    <td>$3,450.00</td>
+    <td>US</td>
+    <td>09/12/1983</td>
+    <td>Washington</td>
+    <td>Female</td>
+    <td>$210.00</td>
+  </tr>
+  <tr onclick="redirectToBankLogs()">
+    <td>TD Bank</td>
+    <td>$6,500.00</td>
+    <td>CA</td>
+    <td>11/05/1987</td>
+    <td>Toronto</td>
+    <td>Male</td>
+    <td>$320.00</td>
+  </tr>
+</tbody>  
+        <tbody>
+  <tr onclick="redirectToBankLogs()">
+    <td>Chase</td>
+    <td>$1,100.00</td>
+    <td>US</td>
+    <td>01/15/1980</td>
+    <td>California</td>
+    <td>Male</td>
+    <td>$150.00</td>
+  </tr>
+  <tr onclick="redirectToBankLogs()">
+    <td>Bank of America</td>
+    <td>$2,350.00</td>
+    <td>US</td>
+    <td>12/03/1975</td>
+    <td>New York</td>
+    <td>Female</td>
+    <td>$180.00</td>
+  </tr>
+  <tr onclick="redirectToBankLogs()">
+    <td>Wells Fargo</td>
+    <td>$5,600.00</td>
+    <td>US</td>
+    <td>06/25/1988</td>
+    <td>Texas</td>
+    <td>Male</td>
+    <td>$200.00</td>
+  </tr>
+  <tr onclick="redirectToBankLogs()">
+    <td>Citibank</td>
+    <td>$3,750.00</td>
+    <td>US</td>
+    <td>03/10/1990</td>
+    <td>Florida</td>
+    <td>Female</td>
+    <td>$250.00</td>
+  </tr>
+  <tr onclick="redirectToBankLogs()">
+    <td>Capital One</td>
+    <td>$900.00</td>
+    <td>US</td>
+    <td>08/18/1982</td>
+    <td>Ohio</td>
+    <td>Male</td>
+    <td>$100.00</td>
+  </tr>
+  <tr onclick="redirectToBankLogs()">
+    <td>HSBC</td>
+    <td>$7,200.00</td>
+    <td>UK</td>
+    <td>04/22/1970</td>
+    <td>London</td>
+    <td>Male</td>
+    <td>$300.00</td>
+  </tr>
+  <tr onclick="redirectToBankLogs()">
+    <td>Barclays</td>
+    <td>$2,800.00</td>
+    <td>UK</td>
+    <td>02/14/1985</td>
+    <td>Manchester</td>
+    <td>Female</td>
+    <td>$220.00</td>
+  </tr>
+  <tr onclick="redirectToBankLogs()">
+    <td>Standard Chartered</td>
+    <td>$4,000.00</td>
+    <td>UK</td>
+    <td>07/30/1978</td>
+    <td>Birmingham</td>
+    <td>Male</td>
+    <td>$180.00</td>
+  </tr>
+  <tr onclick="redirectToBankLogs()">
+    <td>PNC Bank</td>
+    <td>$3,450.00</td>
+    <td>US</td>
+    <td>09/12/1983</td>
+    <td>Washington</td>
+    <td>Female</td>
+    <td>$210.00</td>
+  </tr>
+  <tr onclick="redirectToBankLogs()">
+    <td>TD Bank</td>
+    <td>$6,500.00</td>
+    <td>CA</td>
+    <td>11/05/1987</td>
+    <td>Toronto</td>
+    <td>Male</td>
+    <td>$320.00</td>
+  </tr>
+</tbody>
+          <tr onclick="redirectToBankLogs()">
+            <td>Chase</td>
+            <td>$1,100.00</td>
+            <td>US</td>
+            <td>01/15/1980</td>
+            <td>California</td>
+            <td>Male</td>
+            <td>$150.00</td>
+          </tr>
+          <tr onclick="redirectToBankLogs()">
+            <td>Bank of America</td>
+            <td>$2,350.00</td>
+            <td>US</td>
+            <td>12/03/1975</td>
+            <td>New York</td>
+            <td>Female</td>
+            <td>$180.00</td>
+          </tr>
+          <!-- Add more rows as needed -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Sliding Text -->
+  <div class="sliding-text">
+    <span>🌐Providing quality logs since 2022🌐</span>
+  </div>
+
+  <script>
+    function filterTable() {
+      const searchBar = document.getElementById('searchBar').value.toLowerCase();
+      const rows = document.querySelectorAll('#bankLogsTable tbody tr');
+      rows.forEach(row => {
+        const cells = Array.from(row.cells);
+        const match = cells.some(cell => cell.textContent.toLowerCase().includes(searchBar));
+        row.style.display = match ? '' : 'none';
+      });
+    }
+
+    function redirectToBankLogs() {
+      window.location.href = 'banklogs.html';
+    }
+
+    function goToDepositPage() {
+      window.location.href = 'deposit.html';
+    }
+  </script>
+</body>
+
+</html>
