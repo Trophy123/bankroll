@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vouches | Bankroll Haven</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #0a0a23, #1c1c3c);
+      color: #fff;
+      text-align: center;
+    }
+
+    header {
+      background-color: #1c1c3c;
+      padding: 20px;
+      border-bottom: 2px solid #2b2b5b;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+      color: #00ff7f;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #2b2b5b;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .container h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #ffa500;
+    }
+
+    .vouch {
+      background-color: #1c1c3c;
+      margin: 15px 0;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .vouch img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #ff0000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5em;
+      color: #0a0a23;
+    }
+
+    .vouch-details {
+      flex-grow: 1;
+      text-align: left;
+    }
+
+    .vouch-details strong {
+      color: #ff0000;
+    }
+
+    .vouch-details p {
+      margin: 10px 0;
+      font-size: 1.1em;
+    }
+
+    .vouch-date {
+      color: #aaa;
+      font-size: 0.9em;
+    }
+
+    footer {
+      background-color: #1c1c3c;
+      padding: 15px;
+      border-top: 2px solid #2b2b5b;
+      color: #ccc;
+      font-size: 1em;
+    }
+
+    .sliding-text {
+      margin-top: 20px;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #00ff7f;
+      white-space: nowrap;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .sliding-text span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: slide 10s linear infinite;
+    }
+
+    @keyframes slide {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <h1>Vouches</h1>
+  </header>
+
+  <!-- Vouch Section -->
+  <div class="container">
+    <h2>Vouches From Real Hustlers</h2>
+    <div id="vouchContainer"></div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="sliding-text">
+      <span>🌐 Providing quality logs since 2022 🌐</span>
+    </div>
+  </footer>
+
+  <script>
+    const vouchData = [
+      "This site is straight fire, got my first score here!",
+      "Yo, these logs hit like a jackpot every time.",
+      "Bankroll Haven never misses. Legit AF.",
+      "Been hustlin' here since day one, ain't nobody better.",
+      "If you're not in here, you're slippin'. Top-tier service!",
+      "Logs so hot, I flipped my bag twice this week.",
+      "Real talk, this is the plug you need. No cap.",
+      "Bro, the quality here is unmatched. Period.",
+      "Scored big today! 10/10, will def be back.",
+      "Trust me, Bankroll Haven's the GOAT. All day!",
+      "Logs hit harder than payday. Every. Single. Time.",
+      "Made my first $10K here, and it won’t be the last.",
+      "These guys are the truth! Hustlers for real.",
+      "Top logs, quick service. Y’all know the vibes.",
+      "Best in the game, hands down. Much love!",
+      "I was skeptical, but nah, this place delivers!",
+      "Bankroll Haven made me rich. Facts.",
+      "Everything here checks out. 100% trust.",
+      "Don’t sleep on this site. Game-changer.",
+      "They do it better than anyone else. End of story.",
+      "Real hustlers only. No BS.",
+      "Every log I bought was golden. Bankroll Heaven!",
+      "Back again for the third time this week. Let’s gooo!",
+      "Their support team? Next level. Respect.",
+      "Cashin' out daily thanks to y’all. Much appreciated!",
+      "Got the logs, got the bread. Simple as that.",
+      "These logs speak for themselves. 5 stars.",
+      "Out here ballin' 'cause of Bankroll Haven.",
+      "Always reliable, never disappoints.",
+      "The plug you didn’t know you needed.",
+      "Changing the game, one log at a time.",
+      "Straight gold mines. Love it.",
+      "Quick, easy, and hella profitable.",
+      "Made my year with these. Grateful!",
+      "Their services? Too clean.",
+      "Ain't nobody like this team. Hustlers forever.",
+      "Best investment I made this year. No regrets.",
+      "My wallet stays fat 'cause of this.",
+      "Every transaction is smooth AF.",
+      "Logs so good, it’s almost illegal!",
+      "Don’t even think twice. Go for it.",
+      "Quality over quantity, always.",
+      "No cap, they’re the best in the biz.",
+      "Levelin' up every day thanks to these.",
+      "Hustlin' hard, and Bankroll Haven makes it easy.",
+      "My go-to spot, no questions.",
+      "Took a chance, and it paid off big time.",
+      "Everything’s verified and legit. Respect!",
+      "Y’all keep the hustle alive.",
+      "Bankroll Haven is the plug for real hustlers.",
+      "Got me stackin' like never before.",
+      "Mad respect for the team here.",
+      "Just copped more logs. Feelin' rich already.",
+      "These guys don’t miss. 100% certified.",
+      "Can’t believe how smooth this is. Wow.",
+      "My money talks, and this site delivers.",
+      "They’re killin' the game. Period.",
+      "Flipped my investment in no time.",
+      "Logs always on point. Thank you!",
+      "From broke to ballin' thanks to Bankroll.",
+      "If you’re not buying here, you’re losing money.",
+      "Solid work, solid team. Keep it up!",
+      "Top-tier logs, as always. Respect.",
+      "My grind just got easier. Salute!",
+    ];
+
+    const vouchContainer = document.getElementById("vouchContainer");
+
+    const uniqueDates = [];
+    let currentDate = new Date(2025, 0, 5);
+
+    for (let i = 0; i < 67; i++) {
+      const dateString = currentDate.toISOString().split("T")[0];
+      uniqueDates.push(dateString);
+      currentDate.setDate(currentDate.getDate() - Math.floor(Math.random() * 3) - 1);
+    }
+
+    vouchData.slice(0, 67).forEach((message, index) => {
+      const vouchElement = document.createElement("div");
+      vouchElement.classList.add("vouch");
+
+      vouchElement.innerHTML = `
+        <img src="profile${(index % 5) + 1}.png" alt="Profile">
+        <div class="vouch-details">
+          <strong>User${index + 1}</strong>
+          <p>${message}</p>
+          <div class="vouch-date">${uniqueDates[index]}</div>
+        </div>
+      `;
+
+      vouchContainer.appendChild(vouchElement);
+    });
+  </script>
+</body>
+
+</html>
