@@ -184,13 +184,13 @@
         <i class="fas fa-dollar-sign" style="color: #32cd32;"></i>
         <span>USDT</span>
       </div>
+      <div class="payment-method" onclick="showDetails('Cash App', '$frederickdaq')">
+        <i class="fas fa-money-bill-wave" style="color: #28a745;"></i>
+        <span>Cash App</span>
+      </div>
       <div class="payment-method" onclick="notifyMaintenance('PayPal')">
         <i class="fab fa-paypal" style="color: #0070ba;"></i>
         <span>PayPal (Under Maintenance)</span>
-      </div>
-      <div class="payment-method" onclick="notifyMaintenance('Cash App')">
-        <i class="fas fa-money-bill-wave" style="color: #28a745;"></i>
-        <span>Cash App (Under Maintenance)</span>
       </div>
     </div>
 
@@ -220,7 +220,7 @@
         alert('Please enter a valid deposit amount of $20 or more.');
         return;
       }
-      paymentAddress.value = address;
+      paymentAddress.value = method === 'Cash App' ? `Cashtag: ${address}` : address;
       paymentDetails.style.display = 'block';
       confirmBtn.style.display = 'block';
       alert(`${method} selected. Payment address is displayed.`);
