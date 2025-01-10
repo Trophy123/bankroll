@@ -207,13 +207,9 @@
       <div class="payment-method" onclick="showDetails('USDT', 'TVqtwtu77YEqJtGMUYTr5KMQWvMdN9nGbh')">
         <span style="color: #32cd32; font-weight: bold;">USDT</span>
       </div>
-      <div class="payment-method" onclick="notifyMaintenance('PayPal')">
-        <i class="fab fa-paypal" style="color: #0070ba;"></i>
-        <span>PayPal (Under Maintenance)</span>
-      </div>
-      <div class="payment-method" onclick="notifyMaintenance('Cash App')">
+      <div class="payment-method" onclick="showDetails('Cash App', '$fredericdaq')">
         <i class="fas fa-money-bill-wave" style="color: #28a745;"></i>
-        <span>Cash App (Under Maintenance)</span>
+        <span>Cash App</span>
       </div>
     </div>
 
@@ -246,7 +242,11 @@
     }
 
     function showDetails(method, address) {
-      paymentAddress.value = address;
+      if (method === 'Cash App') {
+        paymentAddress.value = `Cashtag: ${address}`;
+      } else {
+        paymentAddress.value = address;
+      }
       paymentDetails.style.display = 'block';
       confirmBtn.style.display = 'block';
     }
@@ -255,10 +255,6 @@
       paymentAddress.select();
       navigator.clipboard.writeText(paymentAddress.value);
       alert('Address copied to clipboard!');
-    }
-
-    function notifyMaintenance(method) {
-      alert(`${method} is under maintenance. Please choose another payment method.`);
     }
 
     function redirectToEmailPage() {
